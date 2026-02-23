@@ -4,8 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity  // Creates the table user in the database
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) // Set the table name and unique constraint on email
 public class User {
 
     @Id 
