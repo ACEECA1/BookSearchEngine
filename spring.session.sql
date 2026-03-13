@@ -1,1 +1,1 @@
-SELECT * FROM user;
+DROP TABLE book;

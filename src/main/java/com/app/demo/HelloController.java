@@ -1,6 +1,8 @@
 package com.app.demo;
 
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +27,7 @@ public class HelloController {
         return "Hello get!" + param;
     }
     @PostMapping("/hello")
-    public String sayHelloPost() {
+    public String sayHelloPost() {  
         return "Hello post";
     }
     @PostMapping("/users")
@@ -35,5 +37,9 @@ public class HelloController {
     @PostMapping("/file")
     public String createFile(@RequestParam MultipartFile file) { // same as the form field name
         return "Received and a file named: " + file.getOriginalFilename() + " with size: " + file.getSize() + " bytes";
+    }
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userDAO.findAll();
     }
 }

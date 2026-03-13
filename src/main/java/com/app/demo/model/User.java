@@ -1,29 +1,44 @@
 package com.app.demo.model;
 
+import java.util.HashSet;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-@Entity  // Creates the table user in the database
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email")) // Set the table name and unique constraint on email
-public class User {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Set;
+
+@Entity 
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email")) 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class User {
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer id;
 
     private String username;
     private String email;
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "user_roles", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
