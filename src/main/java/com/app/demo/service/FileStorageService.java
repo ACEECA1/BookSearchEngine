@@ -22,8 +22,12 @@ public class FileStorageService {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         Path filePath = Paths.get(UPLOAD_DIR + fileName);
 
+
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         return filePath.toString();
+    }
+    public void indexFile(String filePath) {
+
     }
 }
