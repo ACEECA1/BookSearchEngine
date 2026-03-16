@@ -18,7 +18,6 @@ import com.app.demo.model.Book;
 import com.app.demo.model.BookScoreDTO;
 import com.app.demo.model.ResponseDTO;
 import com.app.demo.service.BookService;
-import com.app.demo.service.FileStorageService;
 import com.app.demo.service.SearchService;
 
 import org.springframework.core.io.Resource;
@@ -37,12 +36,10 @@ public class BookController {
 
     private final BookService bookService;
     private final BookDAO bookDAO;
-    private final FileStorageService fileStorageService;
     private final SearchService searchService;
-    public BookController(BookService bookService, BookDAO bookDAO, FileStorageService fileStorageService, SearchService searchService) {
+    public BookController(BookService bookService, BookDAO bookDAO, SearchService searchService) {
         this.bookService = bookService;
         this.bookDAO = bookDAO;
-        this.fileStorageService = fileStorageService;
         this.searchService = searchService;
     }
 

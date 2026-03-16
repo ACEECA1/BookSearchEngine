@@ -42,9 +42,11 @@ public class IndexationService {
             tokenStream.reset();
             
             while (tokenStream.incrementToken()) {
-                result.add(charTermAttribute.toString());
+                String term = charTermAttribute.toString();
+                if (!term.matches(".*\\d.*")) {
+                    result.add(term);
+                }
             }
-            
             tokenStream.end();
         }
         return result;
