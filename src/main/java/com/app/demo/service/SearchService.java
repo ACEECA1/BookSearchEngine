@@ -90,6 +90,9 @@ public class SearchService {
         }
 
         results.sort((a, b) -> b.getScore().compareTo(a.getScore()));
+        for(BookScoreDTO dto : results) {
+            System.out.println("Book: " + dto.getBook().getTitle() + " - Score: " + dto.getScore());
+        }
         return results;
     }
 
